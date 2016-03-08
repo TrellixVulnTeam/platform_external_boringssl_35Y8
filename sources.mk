@@ -279,6 +279,12 @@ crypto_sources := \
   src/crypto/x509v3/v3_skey.c\
   src/crypto/x509v3/v3_sxnet.c\
   src/crypto/x509v3/v3_utl.c\
+  boringssl-compat/bio_b64.c\
+  boringssl-compat/p_dec.c\
+  boringssl-compat/p_enc.c\
+  boringssl-compat/p_open.c\
+  boringssl-compat/p_seal.c\
+  boringssl-compat/rsa_pss.c\
 
 ssl_sources := \
   src/ssl/d1_both.c\
@@ -309,12 +315,6 @@ ssl_sources := \
   src/ssl/t1_enc.c\
   src/ssl/t1_lib.c\
   src/ssl/t1_reneg.c\
-  boringssl-compat/bio_b64.c\
-  boringssl-compat/p_dec.c\
-  boringssl-compat/p_enc.c\
-  boringssl-compat/p_open.c\
-  boringssl-compat/p_seal.c\
-  boringssl-compat/rsa_pss.c\
 
 tool_sources := \
   src/tool/args.cc\
