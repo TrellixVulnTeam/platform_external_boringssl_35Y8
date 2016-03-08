@@ -497,6 +497,10 @@ OPENSSL_EXPORT int EVP_PKEY_encrypt_init(EVP_PKEY_CTX *ctx);
 OPENSSL_EXPORT int EVP_PKEY_encrypt(EVP_PKEY_CTX *ctx, uint8_t *out,
                                     size_t *out_len, const uint8_t *in,
                                     size_t in_len);
+	
+/* boringssl-compat */
+OPENSSL_EXPORT int EVP_PKEY_encrypt_old(unsigned char *ek, const unsigned char *key, int key_len,
+										EVP_PKEY *pubk);
 
 /* EVP_PKEY_decrypt_init initialises an |EVP_PKEY_CTX| for a decryption
  * operation. It should be called before |EVP_PKEY_decrypt|.
@@ -517,6 +521,10 @@ OPENSSL_EXPORT int EVP_PKEY_decrypt_init(EVP_PKEY_CTX *ctx);
 OPENSSL_EXPORT int EVP_PKEY_decrypt(EVP_PKEY_CTX *ctx, uint8_t *out,
                                     size_t *out_len, const uint8_t *in,
                                     size_t in_len);
+
+/* boring-ssl compat */
+OPENSSL_EXPORT int EVP_PKEY_decrypt_old(unsigned char *key, const unsigned char *ek, int ekl,
+										EVP_PKEY *priv);
 
 /* EVP_PKEY_derive_init initialises an |EVP_PKEY_CTX| for a key derivation
  * operation. It should be called before |EVP_PKEY_derive_set_peer| and
@@ -703,7 +711,19 @@ struct evp_pkey_st {
   const EVP_PKEY_ASN1_METHOD *ameth;
 } /* EVP_PKEY */;
 
-
+	
+/* boringssl-compat */
+OPENSSL_EXPORT int EVP_OpenUpdate(EVP_CIPHER_CTX *ctx, uint8_t *out, int *out_len,
+					   const uint8_t *in, int in_len);
+OPENSSL_EXPORT int EVP_OpenInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type,
+					 const unsigned char *ek, int ekl, const unsigned char *iv,
+					 EVP_PKEY *priv);
+OPENSSL_EXPORT int EVP_OpenFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+OPENSSL_EXPORT int EVP_CIPHER_CTX_rand_key(EVP_CIPHER_CTX *ctx, unsigned char *key);
+OPENSSL_EXPORT int EVP_SealInit(EVP_CIPHER_CTX *ctx, const EVP_CIPHER *type, unsigned char **ek,
+	     int *ekl, unsigned char *iv, EVP_PKEY **pubk, int npubk);
+OPENSSL_EXPORT int EVP_SealFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl);
+	
 #if defined(__cplusplus)
 }  /* extern C */
 #endif

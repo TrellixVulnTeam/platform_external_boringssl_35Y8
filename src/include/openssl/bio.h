@@ -568,6 +568,8 @@ OPENSSL_EXPORT int BIO_set_conn_port(BIO *bio, const char *port_str);
  * returns one on success and zero otherwise. */
 OPENSSL_EXPORT int BIO_set_nbio(BIO *bio, int on);
 
+/* boring-ssl compat */
+OPENSSL_EXPORT const BIO_METHOD *BIO_f_base64(void);
 
 /* Datagram BIOs.
  *
