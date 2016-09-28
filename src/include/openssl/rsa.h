@@ -330,6 +330,12 @@ OPENSSL_EXPORT int RSA_add_pkcs1_prefix(uint8_t **out_msg, size_t *out_msg_len,
                                         int *is_alloced, int hash_nid,
                                         const uint8_t *msg, size_t msg_len);
 
+/* boringssl-compat */
+OPENSSL_EXPORT int RSA_verify_PKCS1_PSS(RSA *rsa,
+						 const unsigned char *mHash,
+						 const EVP_MD *Hash,
+						 const unsigned char *EM,
+						 int sLen);
 
 /* ASN.1 functions. */
 
